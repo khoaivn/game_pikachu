@@ -20,6 +20,7 @@ public class DrawView extends View
 	private MediaPlayer pair;
 	private MediaPlayer level;
 	private MediaPlayer no_move;
+
 	public DrawView(Context context) 
 	{
 	  	super(context);
@@ -30,22 +31,24 @@ public class DrawView extends View
 	
 	private void InitSound(Context c)
 	{
-		no_=MediaPlayer.create(c, R.raw.no);
-		Click =MediaPlayer.create(c, R.raw.click);
-		pair=MediaPlayer.create(c, R.raw.pair);
-		level=MediaPlayer.create(c, R.raw.level);
-		no_move=MediaPlayer.create(c, R.raw.no_move);
+		no_= MediaPlayer.create(c, R.raw.no);
+		Click = MediaPlayer.create(c, R.raw.click);
+		pair = MediaPlayer.create(c, R.raw.pair);
+		level = MediaPlayer.create(c, R.raw.level);
+		no_move = MediaPlayer.create(c, R.raw.no_move);
 	}
 	//so luong hinh pikachu
-		final int CardNo=15;
-		final int PicCount=6;
+		final int CardNo = 15;
+		final int PicCount = 6;
+
 		//ma tran hinh 10x6
-		final int GameWidth=9; 
-		final int GameHight=10;
+		final int GameWidth = 9;
+		final int GameHight = 10;
 		
 		//kich thuoc cua cac the hinh
-		final int CardSizeW=44;
-		final int CardSizeH=54;
+		final int CardSizeW = 100;
+		final int CardSizeH = 100
+				;
 		
 		
 		//mang chua id cua cac hinh
@@ -56,10 +59,10 @@ public class DrawView extends View
 									R.drawable.image13,R.drawable.image14,R.drawable.image15
 								};
 		//mang cac hinh duoc doc tu Imagepath
-		private Bitmap[]CardImages;
+		private Bitmap[] CardImages;
 		
 		//luu gia tri cua cac the hinh vd:[0][0]=0 ngla co hinh tai vi tri [0][0] -1 la ko co hinh
-		int [][]CardMatrix;
+		int[][] CardMatrix;
 		
 		//so the hinh con lai trong ma tran chua duoc an
 		int RemainingCount;
@@ -70,7 +73,7 @@ public class DrawView extends View
 		//vi tri cua the hinh thu nhat
 		int CardX,CardY;
 		int CurX,CurY;
-		int TongDiem=0;
+		int TongDiem = 0;
 		//chieu dai duong di tu the hinh thu 2 den the hinh thu 1
 		int rCount;
 		//duong di tu the hinh thu 2 den the hinh thu 1
@@ -82,16 +85,16 @@ public class DrawView extends View
 		int [] tX,tY;
 		Direction[] d;              //Hướng đi của đường đi tạm
 		
-		int []dX={1,0,-1,0};
-		int []dY={0,1,0,-1};
-		int Leve=0;
+//		int []dX= {1,0,-1,0};
+//		int []dY={0,1,0,-1};
+		int Leve = 0;
 		private String str_time;
 		
 		
 		private void Init()
 		{
 			//khoi tao mang bitmap
-			CardImages=new Bitmap[CardNo];
+			CardImages = new Bitmap[CardNo];
 			
 			//tao va nap 15 hinh vao mang bitmap
 			for(int i=0;i<CardNo;i++)
@@ -165,14 +168,13 @@ public class DrawView extends View
 		}
 
 		//kich thuoc cua bitmap BG
-		final int width =550;
-		final int height = 750;
+
+//		final int width = 550;
+//		final int height = 750;
 		
 		//thuoc tinh de ve Rectangle
 		private void DrawBG(Canvas canvas)
 		{
-			
-				
 			////////////
 			int left,rigth,top,bottom;
 			//tao bitmap BG
@@ -337,54 +339,53 @@ public class DrawView extends View
 		 
 		//sau khi ham nay ket thuc ta duoc cac gia tri
 		// rCount va rX[],rY[]
-		private void FindRouteBFS(int x,int y)
-		{
-			int w=GameWidth+2;
-			int h=GameHight+2;
-			BlockingQueue<Node> queue=new ArrayBlockingQueue<Node>(w*h);
-			int [] Trace=new int[w*h];
-			for(int i=0;i<w*h;i++)
-				Trace[i]=0;//tat ca cac hinh trong ma trang deu chua duoc tham
-			
-			Trace[y*w +x]=-1;//ghi nhan dinh da duoc tham
-			queue.add(new Node(x,y,0));
-			while(!queue.isEmpty())
-			{
-				Node n=queue.poll();
-				if(n.x==CardX && n.y==CardY)
-				{
-					rCount=n.Level + 1;	
-					
-					for(int i=rCount-1; i>=0; i--)
-					{
-						rX[i]=n.x;
-						rY[i]=n.y;
-						int k=Trace[n.y * n.x];
-						n.x=k % w;
-						n.y=k/w;
-					}
-					return;
-				}
-				if(n.Level<3)
-				{
-					for(int i=0;i<4;i++)
-					{
-						x=n.x+ dX[i];
-						y=n.y+ dY[i];
-						 while (x >= 0 && x < w && y >= 0 && y < h && CardMatrix[y][x] == -1)
-						 {
-							 if (Trace[y * w + x] == 0)
-							 {
-								 Trace[y*w + x]=n.y*w+n.x;
-								 queue.add(new Node(x,y,n.Level+1));
-							 }
-							 x=x+dX[i];
-							 y=y+dY[i];
-						 }
-					}
-				}
-			}
-		}
+//		private void FindRouteBFS(int x,int y) {
+//			int w=GameWidth+2;
+//			int h=GameHight+2;
+//			BlockingQueue<Node> queue=new ArrayBlockingQueue<Node>(w*h);
+//			int [] Trace=new int[w*h];
+//			for(int i=0;i<w*h;i++)
+//				Trace[i]=0;//tat ca cac hinh trong ma trang deu chua duoc tham
+//
+//			Trace[y*w +x]=-1;//ghi nhan dinh da duoc tham
+//			queue.add(new Node(x,y,0));
+//			while(!queue.isEmpty())
+//			{
+//				Node n=queue.poll();
+//				if(n.x==CardX && n.y==CardY)
+//				{
+//					rCount=n.Level + 1;
+//
+//					for(int i=rCount-1; i>=0; i--)
+//					{
+//						rX[i]=n.x;
+//						rY[i]=n.y;
+//						int k=Trace[n.y * n.x];
+//						n.x=k % w;
+//						n.y=k/w;
+//					}
+//					return;
+//				}
+//				if(n.Level<3)
+//				{
+//					for(int i=0;i<4;i++)
+//					{
+//						x=n.x+ dX[i];
+//						y=n.y+ dY[i];
+//						 while (x >= 0 && x < w && y >= 0 && y < h && CardMatrix[y][x] == -1)
+//						 {
+//							 if (Trace[y * w + x] == 0)
+//							 {
+//								 Trace[y*w + x]=n.y*w+n.x;
+//								 queue.add(new Node(x,y,n.Level+1));
+//							 }
+//							 x=x+dX[i];
+//							 y=y+dY[i];
+//						 }
+//					}
+//				}
+//			}
+//		}
 		private void CardClick(int x,int y)
 		{
 			if(CardMatrix[y][x] != -1)

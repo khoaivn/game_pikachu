@@ -8,14 +8,17 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.widget.RelativeLayout;
-public class Pikachu extends Activity 
+import android.support.v7.app.AppCompatActivity;
+
+
+public class Pikachu extends AppCompatActivity
 {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.layout_pikachu);
+//		setContentView(R.layout.layout_pikachu);
 		//khoi tao 1 lan duy nhat
 		// MediaPlayer bgSound =MediaPlayer.create(this, R.raw.bgm);
 		 DrawView drawView = new DrawView(this);
